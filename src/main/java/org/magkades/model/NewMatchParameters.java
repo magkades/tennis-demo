@@ -1,12 +1,5 @@
 package org.magkades.model;
 
-import org.apache.commons.beanutils.BeanUtils;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
-
 /**
  * Contains the parameters to create new match.
  */

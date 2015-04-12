@@ -7,8 +7,6 @@ import org.magkades.model.NewMatchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.ws.rs.core.Response;
-
 public class MatchServiceImpl implements MatchService {
 
     @Autowired
@@ -29,11 +27,11 @@ public class MatchServiceImpl implements MatchService {
 
     private void validateInputForCreation(NewMatchParameters newMatchParameters) throws AppException {
         if(newMatchParameters.getPlayer1() == null){
-            throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Failure to create match due to insufficient data.",
+            throw new AppException(400, "Failure to create match due to insufficient data.",
                     "Please verify that player 1 is properly generated/set");
         }
         if(newMatchParameters.getPlayer2() == null){
-            throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Failure to create match due to insufficient data.",
+            throw new AppException(400, "Failure to create match due to insufficient data.",
                     "Please verify that player 1 is properly generated/set");
         }
     }

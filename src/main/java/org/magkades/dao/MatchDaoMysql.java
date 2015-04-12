@@ -1,9 +1,7 @@
 package org.magkades.dao;
 
-import com.fasterxml.jackson.databind.deser.DataFormatReaders;
+import org.magkades.hibernate.Storage;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Date;
 
 /**
@@ -11,11 +9,11 @@ import java.util.Date;
  */
 public class MatchDaoMysql implements MatchDao {
 
-    @PersistenceContext(unitName="demoRestPersistence")
-    private EntityManager entityManager;
 
     public Long createMatch(MatchEntity matchEntity) {
 
+        Storage<MatchEntity> storage = new Storage<MatchEntity>(matchEntity);
+        storage.beginTransaction();
         matchEntity.setStartTs(new Date());
         matchEntity.setLatestTs(new Date());
         matchEntity.setStatus(MatchStatus.ONGOING.getValue());
@@ -25,8 +23,8 @@ public class MatchDaoMysql implements MatchDao {
         matchEntity.setSetsCount2(0);
         matchEntity.setGamesCount2(0);
         matchEntity.setPointsCount2(0);
-        entityManager.merge(matchEntity);
-        entityManager.flush();
+        storage.insert(matchEntity);
+        storage.commit();
 
         return matchEntity.getId();
     }

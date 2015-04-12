@@ -10,5 +10,5 @@
 /temp.txt
 /release.properties
 /.idea
-/demo-rest-jersey-spring.iml
 /c:
+*.log
