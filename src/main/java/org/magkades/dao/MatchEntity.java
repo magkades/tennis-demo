@@ -72,6 +72,20 @@ public class MatchEntity implements Serializable {
         this.pointsCount2 = pointsCount2;
     }
 
+    public void initialise() {
+        this.setStartTs(new Date());
+        this.setLatestTs(new Date());
+        this.setStatus(MatchStatus.ONGOING.getValue());
+        this.setSetsCount1(0);
+        this.setGamesCount1(0);
+        this.setPointsCount1(0);
+        this.setSetsCount2(0);
+        this.setGamesCount2(0);
+        this.setPointsCount2(0);
+    }
+
+
+
     public Long getId() {
         return id;
     }
