@@ -155,6 +155,7 @@ public class MatchEntity implements Serializable {
     }
 
     public void setPointsCount1(Integer pointsCount1) {
+        System.out.println("Setting the counts of player " + this.player1 + " to " + pointsCount1);
         this.pointsCount1 = pointsCount1;
     }
 

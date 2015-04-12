@@ -71,7 +71,7 @@ public class MatchDaoMysqlTest {
         matchDao.updateMatch(id, PLAYER_1);
 
         // then
-        Assert.assertEquals(matchDao.getMatchById(id).getPointsCount1(), new Integer(2));
+        Assert.assertEquals(new Integer(2), matchDao.getMatchById(id).getPointsCount1());
 
         // cleanup
         deleteMatch(matchEntity);
