@@ -29,7 +29,7 @@ public class AppException extends Exception {
 	 * @param developerMessage
 	 */
 	public AppException(int status, int code, String message,
-						String developerMessage, String link) {
+						String developerMessage) {
 		super(message);
 		this.status = status;
 		this.code = code;
