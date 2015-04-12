@@ -2,7 +2,7 @@ package org.magkades.hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class Storage <T > {
+public class Storage <T> {
 
     private static SessionFactory getSessionFactory() {
         return HibernateUtil.getSessionFactory();
@@ -40,7 +40,7 @@ public class Storage <T > {
     // but we know the value returned will be of the right type because
     // we specify the entity (T) class in the call.
     //
-    // Note that "get" will return a null if no value with this id fails
+    // Note that "get" will return a null if no value with this id exists
     @SuppressWarnings (value="unchecked")
     public T getById(Long id) {
         return (T) session.get(entity.getClass(), id);

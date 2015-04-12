@@ -38,19 +38,15 @@ public class MatchDaoMysqlTest {
     public void shouldCreateMatchSuccessfully(){
 
         // given
-        MatchEntity matchEntity = new MatchEntity();
-
-        matchEntity.setPlayer1(PLAYER_1);
-        matchEntity.setPlayer2(PLAYER_2);
-
+        
         // when
-        Long matchId = matchDao.createMatch(matchEntity);
+        Long matchId = matchDao.createMatch(PLAYER_1, PLAYER_2);
 
         // then
         Assert.assertNotNull(matchId);
 
         // cleanup
-        deleteMatch(matchEntity);
+        deleteMatch(matchDao.getMatchById(matchId));
     }
 
     private void deleteMatch(MatchEntity matchEntity) {
