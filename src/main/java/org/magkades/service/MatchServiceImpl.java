@@ -4,8 +4,9 @@ import org.magkades.dao.MatchDao;
 import org.magkades.dao.MatchEntity;
 import org.magkades.dao.MatchStatus;
 import org.magkades.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 public class MatchServiceImpl implements MatchService {
 
@@ -13,6 +14,7 @@ public class MatchServiceImpl implements MatchService {
     MatchDao matchDao;
 
     Mapper<MatchEntity, MatchResponse> mapper = new MatchResponseMapper();
+    private static final Logger LOGGER = LoggerFactory.getLogger(MatchServiceImpl.class);
 
     @Override
     public NewMatchResponse createMatch(NewMatchParameters newMatchParameters) throws AppException {
@@ -26,12 +28,14 @@ public class MatchServiceImpl implements MatchService {
 
     private void validateInputForCreation(NewMatchParameters newMatchParameters) throws AppException {
         if(newMatchParameters.getPlayer1() == null){
-            throw new AppException(400, "Failure to create match due to insufficient data.",
-                    "Please verify that player 1 is properly set");
+            String message = "Failure to create match, please verify that player 1 is properly set.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
         if(newMatchParameters.getPlayer2() == null){
-            throw new AppException(400, "Failure to create match due to insufficient data.",
-                    "Please verify that player 2 is properly set");
+            String message = "Failure to create match, please verify that player 2 is properly set.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
     }
 
@@ -48,25 +52,30 @@ public class MatchServiceImpl implements MatchService {
         Long matchId = newPointParameters.getMatchId();
         String player = newPointParameters.getPlayer();
         if(matchId == null){
-            throw new AppException(400, "Failure to update match due to insufficient data.",
-                    "Please verify that match id is properly set");
+            String message = "Failure to update match, please verify that match id is properly set.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
         if(player == null){
-            throw new AppException(400, "Failure to update match due to insufficient data.",
-                    "Please verify that player is properly set");
+            String message = "Failure to update match, please verify that player is properly set.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
         MatchEntity matchEntity = matchDao.getMatchById(newPointParameters.getMatchId());
         if(matchEntity == null){
-            throw new AppException(400, "Failure to update match, match id does not exist.",
-                    "Please verify that match id has been previously generated.");
+            String message = "Failure to update match, please verify that match id is properly set.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
         if((matchEntity.getPlayer1() != player) && (matchEntity.getPlayer2() != player)){
-            throw new AppException(400, "Failure to update match, player does not exist.",
-                    "Please verify that correct player is provided.");
+            String message = "Failure to update match, please verify correct player.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
         if(matchEntity.getStatus().equals(MatchStatus.COMPLETE.getValue())){
-            throw new AppException(400, "Failure to update match, match is complete.",
-                    "Please verify that match is ongoing.");
+            String message = "Failure to update match, please verify that match is ongoing.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
     }
 
@@ -74,8 +83,9 @@ public class MatchServiceImpl implements MatchService {
     public MatchResponse readMatch(MatchParameters matchParameters) throws AppException {
         MatchEntity matchEntity = matchDao.getMatchById(matchParameters.getMatchId());
         if(matchEntity == null){
-            throw new AppException(400, "Failure to fetch match.",
-                    "Please verify that match id is properly set");
+            String message = "Failure to fetch match, please verify that match id is properly set.";
+            LOGGER.debug(message);
+            throw new AppException(400, message);
         }
         return mapper.map(matchEntity);
     }

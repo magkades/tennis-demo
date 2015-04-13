@@ -10,19 +10,14 @@ public class AppException extends Exception {
 	// application specific error code
 	private int code;
 
-	// detailed error description for developers
-	private String developerMessage;
-	
 	/**
 	 * 
 	 * @param code
 	 * @param message
-	 * @param developerMessage
 	 */
-	public AppException(int code, String message, String developerMessage) {
+	public AppException(int code, String message) {
 		super(message);
 		this.code = code;
-		this.developerMessage = developerMessage;
 	}
 
 	public AppException() { }
@@ -33,13 +28,5 @@ public class AppException extends Exception {
 
 	public void setCode(int code) {
 		this.code = code;
-	}
-
-	public String getDeveloperMessage() {
-		return developerMessage;
-	}
-
-	public void setDeveloperMessage(String developerMessage) {
-		this.developerMessage = developerMessage;
 	}
 }

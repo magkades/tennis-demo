@@ -71,7 +71,7 @@ public class MatchServiceImplTest {
     public void shouldNotCreateMatchWithMissingPlayer() throws AppException {
 
         exception.expect(AppException.class);
-        exception.expectMessage("Failure to create match due to insufficient data.");
+        exception.expectMessage("Failure to create match, please verify that player 1 is properly set.");
 
         // when
         matchServiceImpl.createMatch(new NewMatchParameters());
@@ -105,7 +105,7 @@ public class MatchServiceImplTest {
     public void shouldNotUpdateMatchWithNonExistingMatchId() throws AppException {
 
         exception.expect(AppException.class);
-        exception.expectMessage("Failure to update match, match id does not exist.");
+        exception.expectMessage("Failure to update match, please verify that match id is properly set.");
 
         // given
         NewPointParameters newPointParameters = new NewPointParameters();
@@ -123,7 +123,7 @@ public class MatchServiceImplTest {
     public void shouldNotUpdateMatchWithNonExistingPlayer() throws AppException {
 
         exception.expect(AppException.class);
-        exception.expectMessage("Failure to update match, player does not exist.");
+        exception.expectMessage("Failure to update match, please verify correct player.");
 
         // given
         NewPointParameters newPointParameters = new NewPointParameters();
@@ -145,7 +145,7 @@ public class MatchServiceImplTest {
     public void shouldNotUpdateMatchWithStatusComplete() throws AppException {
 
         exception.expect(AppException.class);
-        exception.expectMessage("Failure to update match, match is complete.");
+        exception.expectMessage("Failure to update match, please verify that match is ongoing.");
 
         // given
         NewPointParameters newPointParameters = new NewPointParameters();
@@ -187,7 +187,7 @@ public class MatchServiceImplTest {
     public void shouldNotReadMatchWithBadId() throws AppException {
 
         exception.expect(AppException.class);
-        exception.expectMessage("Failure to fetch match.");
+        exception.expectMessage("Failure to fetch match, please verify that match id is properly set.");
 
         // given
         MatchParameters matchParameters = new MatchParameters();

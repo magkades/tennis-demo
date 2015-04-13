@@ -8,11 +8,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.magkades.dao.MatchDaoMysqlTest;
 import org.magkades.hibernate.HibernateUtil;
+import org.slf4j.LoggerFactory;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
-        TestStorage.class, MatchDaoMysqlTest.class
-        /* , Add more test classes here separated by commas*/
+        MatchDaoMysqlTest.class
 } )
 public class RuleSuite{
 
@@ -26,13 +26,12 @@ public class RuleSuite{
     public static ExternalResource testRule = new ExternalResource(){
         @Override
         protected void before() throws Throwable{
-            Logger.getLogger("org.magkades.tests").log(Level.DEBUG, "Inside RuleSuite::ExternalResource::before.");
+            LoggerFactory.getLogger(RuleSuite.class).debug("Inside RuleSuite::ExternalResource::before.");
             util = new HibernateUtil();
         }
 
         @Override
         protected void after(){
-            // Empty the database.
             Logger.getLogger("org.magkades.tests").log(Level.DEBUG, "Inside RuleSuite::ExternalResource::after.");
         }
     };
