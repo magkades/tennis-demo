@@ -47,9 +47,4 @@ public class MatchDaoMysql implements MatchDao {
         storage.update(matchEntity);
         storage.commit();
     }
-
-//    public void setScoreAdjuster(ScoreAdjuster scoreAdjuster) {
-//        this.scoreAdjuster = scoreAdjuster;
-//    }
-
 }

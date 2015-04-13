@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Match entity 
+ * Match hibernate entity for database table and application object.
  *
  */
 @Entity
@@ -24,7 +24,6 @@ public class MatchEntity implements Serializable {
     private String player1;
 
     @Column(name="player2")
-
     private String player2;
 
     @Column(name="status")
@@ -83,8 +82,6 @@ public class MatchEntity implements Serializable {
         this.setGamesCount2(0);
         this.setPointsCount2(0);
     }
-
-
 
     public Long getId() {
         return id;
@@ -154,10 +151,7 @@ public class MatchEntity implements Serializable {
         return pointsCount1;
     }
 
-    public void setPointsCount1(Integer pointsCount1) {
-        System.out.println("Setting the counts of player " + this.player1 + " to " + pointsCount1);
-        this.pointsCount1 = pointsCount1;
-    }
+    public void setPointsCount1(Integer pointsCount1) { this.pointsCount1 = pointsCount1; }
 
     public Integer getSetsCount2() {
         return setsCount2;

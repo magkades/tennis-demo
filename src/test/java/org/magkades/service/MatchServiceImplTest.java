@@ -9,12 +9,11 @@ import org.junit.runner.RunWith;
 import org.magkades.dao.MatchDao;
 import org.magkades.dao.MatchEntity;
 import org.magkades.dao.MatchStatus;
-import org.magkades.model.NewMatchParameters;
-import org.magkades.model.NewMatchResponse;
-import org.magkades.model.NewPointParameters;
-import org.magkades.model.NewPointResponse;
+import org.magkades.model.*;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.Date;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
@@ -37,10 +36,13 @@ public class MatchServiceImplTest {
     @Mock
     MatchDao matchDao;
 
+    MatchResponseMapper mapper;
+
     @Before
     public void setUp() throws Exception {
         matchServiceImpl = new MatchServiceImpl();
         matchServiceImpl.setMatchDao(matchDao);
+        mapper = new MatchResponseMapper();
     }
 
     @Test
@@ -154,5 +156,38 @@ public class MatchServiceImplTest {
         matchServiceImpl.updateMatch(newPointParameters);
 
         // then exception
+    }
+
+    @Test
+    public void shouldReadMatchSuccessfully() throws AppException {
+        // given
+        MatchParameters matchParameters = new MatchParameters();
+        matchParameters.setMatchId(MATCH_ID);
+        MatchEntity matchEntity = new MatchEntity();
+        matchEntity.initialise();
+        matchEntity.setPlayer1(PLAYER_1);
+        matchEntity.setPlayer2(PLAYER_2);
+
+        // when
+        when(matchDao.getMatchById(MATCH_ID)).thenReturn(matchEntity);
+        MatchResponse matchResponse = matchServiceImpl.readMatch(matchParameters);
+
+        // then
+        verify(matchDao, times(1)).getMatchById(MATCH_ID);
+        Assert.assertTrue(matchResponse.isSuccess());
+        Assert.assertTrue(matchResponse.getPlayer1().equals(PLAYER_1));
+    }
+
+    @Test
+    public void shouldNotReadMatchWithBadId() throws AppException {
+
+        exception.expect(AppException.class);
+        exception.expectMessage("Failure to create match due to insufficient data.");
+
+        // when
+        matchServiceImpl.createMatch(new NewMatchParameters());
+
+        // then exception
+
     }
 }

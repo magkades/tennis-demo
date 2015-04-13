@@ -15,7 +15,6 @@ public class ScoreAdjuster {
     private static final int GAMES_THRESHOLD = 6;
     private static final int SETS_THRESHOLD = 2;
 
-
     private Map<String, Integer> pointsMap = new HashMap<>();
     private Map<String, Integer> gamesMap = new HashMap<>();
     private Map<String, Integer> setsMap = new HashMap<>();

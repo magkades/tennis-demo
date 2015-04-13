@@ -1,7 +1,7 @@
 package org.magkades.model;
 
 /**
- * Contains the parameters to create new match.
+ * parameters to create new match.
  */
 public class NewMatchParameters {
 

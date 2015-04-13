@@ -1,17 +1,12 @@
 package org.magkades.model;
 
 /**
- * Contains the parameters to update match with new point.
+ * Parameters to update match with new point.
  */
 public class NewPointParameters {
 
     private Long matchId;
     private String player;
-
-    public NewPointParameters(Long matchId, String player) {
-        this.matchId = matchId;
-        this.player = player;
-    }
 
     public NewPointParameters(){}
 

@@ -1,5 +1,9 @@
 package org.magkades.dao;
 
+/**
+ * Enum representing valid status of a match.
+ *
+ */
 public enum MatchStatus {
     ONGOING("ONGOING"),
     COMPLETE("COMPLETE");

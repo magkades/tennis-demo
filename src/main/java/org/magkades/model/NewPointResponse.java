@@ -1,7 +1,7 @@
 package org.magkades.model;
 
 /**
- * Contains the response to the request for creating new match.
+ * Response to be returned when match is updated with new point.
  */
 public class NewPointResponse {
     private boolean success;

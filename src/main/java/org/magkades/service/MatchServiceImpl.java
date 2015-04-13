@@ -3,10 +3,7 @@ package org.magkades.service;
 import org.magkades.dao.MatchDao;
 import org.magkades.dao.MatchEntity;
 import org.magkades.dao.MatchStatus;
-import org.magkades.model.NewMatchParameters;
-import org.magkades.model.NewMatchResponse;
-import org.magkades.model.NewPointParameters;
-import org.magkades.model.NewPointResponse;
+import org.magkades.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +12,9 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     MatchDao matchDao;
 
-    @Transactional("transactionManager")
+    Mapper<MatchEntity, MatchResponse> mapper = new MatchResponseMapper();
+
+    @Override
     public NewMatchResponse createMatch(NewMatchParameters newMatchParameters) throws AppException {
         validateInputForCreation(newMatchParameters);
         Long id = matchDao.createMatch(newMatchParameters.getPlayer1(), newMatchParameters.getPlayer2());
@@ -28,14 +27,15 @@ public class MatchServiceImpl implements MatchService {
     private void validateInputForCreation(NewMatchParameters newMatchParameters) throws AppException {
         if(newMatchParameters.getPlayer1() == null){
             throw new AppException(400, "Failure to create match due to insufficient data.",
-                    "Please verify that player 1 is properly generated/set");
+                    "Please verify that player 1 is properly set");
         }
         if(newMatchParameters.getPlayer2() == null){
             throw new AppException(400, "Failure to create match due to insufficient data.",
-                    "Please verify that player 2 is properly generated/set");
+                    "Please verify that player 2 is properly set");
         }
     }
 
+    @Override
     public NewPointResponse updateMatch(NewPointParameters newPointParameters) throws AppException {
         validateInputForUpdate(newPointParameters);
         NewPointResponse newPointResponse = new NewPointResponse();
@@ -49,11 +49,11 @@ public class MatchServiceImpl implements MatchService {
         String player = newPointParameters.getPlayer();
         if(matchId == null){
             throw new AppException(400, "Failure to update match due to insufficient data.",
-                    "Please verify that match id is properly generated/set");
+                    "Please verify that match id is properly set");
         }
         if(player == null){
             throw new AppException(400, "Failure to update match due to insufficient data.",
-                    "Please verify that player is properly generated/set");
+                    "Please verify that player is properly set");
         }
         MatchEntity matchEntity = matchDao.getMatchById(newPointParameters.getMatchId());
         if(matchEntity == null){
@@ -70,6 +70,16 @@ public class MatchServiceImpl implements MatchService {
         }
     }
 
+    @Override
+    public MatchResponse readMatch(MatchParameters matchParameters) throws AppException {
+        MatchEntity matchEntity = matchDao.getMatchById(matchParameters.getMatchId());
+        if(matchEntity == null){
+            throw new AppException(400, "Failure to fetch match.",
+                    "Please verify that match id is properly set");
+        }
+        return mapper.map(matchEntity);
+    }
+    
     public void setMatchDao(MatchDao matchDao) {
         this.matchDao = matchDao;
     }

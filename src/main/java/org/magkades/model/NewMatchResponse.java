@@ -1,7 +1,7 @@
 package org.magkades.model;
 
 /**
- * Contains the response to the request for creating new match.
+ * Response to be returned when match is created.
  */
 public class NewMatchResponse {
     private boolean success;
