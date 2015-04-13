@@ -1,19 +1,24 @@
 package org.magkades.service;
 
+import org.magkades.dao.MatchDao;
+import org.magkades.dao.MatchEntity;
+import org.magkades.dao.MatchStatus;
+import org.magkades.model.MatchResponse;
+import org.magkades.model.MatchParameters;
+import org.magkades.model.NewMatchResponse;
+import org.magkades.model.NewMatchParameters;
+import org.magkades.model.NewPointParameters;
+import org.magkades.model.NewPointResponse;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.magkades.dao.MatchDao;
-import org.magkades.dao.MatchEntity;
-import org.magkades.dao.MatchStatus;
-import org.magkades.model.*;
+
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.Date;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
@@ -182,12 +187,16 @@ public class MatchServiceImplTest {
     public void shouldNotReadMatchWithBadId() throws AppException {
 
         exception.expect(AppException.class);
-        exception.expectMessage("Failure to create match due to insufficient data.");
+        exception.expectMessage("Failure to fetch match.");
+
+        // given
+        MatchParameters matchParameters = new MatchParameters();
+        matchParameters.setMatchId(MATCH_ID);
 
         // when
-        matchServiceImpl.createMatch(new NewMatchParameters());
+        when(matchDao.getMatchById(MATCH_ID)).thenReturn(null);
+        MatchResponse matchResponse = matchServiceImpl.readMatch(matchParameters);
 
         // then exception
-
     }
 }

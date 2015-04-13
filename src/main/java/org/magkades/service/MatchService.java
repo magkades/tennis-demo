@@ -3,7 +3,7 @@ package org.magkades.service;
 import org.magkades.model.*;
 
 /**
- * These are the functions to be used by the restful API.
+ * Functions to be used by the restful API.
  */
 public interface MatchService {
 

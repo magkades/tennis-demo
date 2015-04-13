@@ -7,13 +7,11 @@ package org.magkades.service;
  */
 public class AppException extends Exception {
 
-	private static final long serialVersionUID = -8999932578270387947L;
+	// application specific error code
+	private int code;
 
-	/** application specific error code */
-	int code; 
-
-	/** detailed error description for developers*/
-	String developerMessage;	
+	// detailed error description for developers
+	private String developerMessage;
 	
 	/**
 	 * 
@@ -21,8 +19,7 @@ public class AppException extends Exception {
 	 * @param message
 	 * @param developerMessage
 	 */
-	public AppException(int code, String message,
-						String developerMessage) {
+	public AppException(int code, String message, String developerMessage) {
 		super(message);
 		this.code = code;
 		this.developerMessage = developerMessage;
