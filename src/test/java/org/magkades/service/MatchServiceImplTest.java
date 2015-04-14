@@ -1,7 +1,5 @@
 package org.magkades.service;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.magkades.dao.MatchDao;
 import org.magkades.dao.MatchEntity;
 import org.magkades.dao.MatchStatus;
