@@ -1,7 +1,5 @@
 package org.magkades.tests;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.junit.ClassRule;
 import org.junit.rules.ExternalResource;
 import org.junit.runner.RunWith;

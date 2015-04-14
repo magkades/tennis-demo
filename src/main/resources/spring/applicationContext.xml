@@ -14,7 +14,7 @@
  
 	<context:component-scan base-package="org.magkades.*" />
 
-	<bean id="matchDao" class="org.magkades.dao.MatchDaoMysql"/>
+	<bean id="matchDao" class="org.magkades.dao.MatchDaoHibernate"/>
 	<bean id="matchService" class="org.magkades.service.MatchServiceImpl" />
 
 </beans>

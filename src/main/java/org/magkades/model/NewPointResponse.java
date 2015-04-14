@@ -1,14 +1,13 @@
 package org.magkades.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Response to be returned when match is updated with new point.
  */
+@XmlRootElement
 public class NewPointResponse {
     private boolean success;
-
-    public NewPointResponse(boolean success, String matchId) {
-        this.success = success;
-    }
 
     public NewPointResponse(){}
 

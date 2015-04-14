@@ -1,5 +1,7 @@
 package org.magkades.service;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.magkades.dao.MatchDao;
 import org.magkades.dao.MatchEntity;
 import org.magkades.dao.MatchStatus;
@@ -10,6 +12,7 @@ import org.magkades.model.NewMatchParameters;
 import org.magkades.model.NewPointParameters;
 import org.magkades.model.NewPointResponse;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,6 +22,8 @@ import org.junit.runner.RunWith;
 
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.io.IOException;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
@@ -198,5 +203,25 @@ public class MatchServiceImplTest {
         MatchResponse matchResponse = matchServiceImpl.readMatch(matchParameters);
 
         // then exception
+    }
+
+    @Test
+    public void shouldCreateValidJsonMatchResponse() throws AppException, IOException {
+        // given
+        MatchParameters matchParameters = new MatchParameters();
+        matchParameters.setMatchId(MATCH_ID);
+        MatchEntity matchEntity = new MatchEntity();
+        matchEntity.initialise();
+        matchEntity.setPlayer1(PLAYER_1);
+        matchEntity.setPlayer2(PLAYER_2);
+
+        // when
+        when(matchDao.getMatchById(MATCH_ID)).thenReturn(matchEntity);
+        MatchResponse matchResponse = matchServiceImpl.readMatch(matchParameters);
+        ObjectMapper mapper = new ObjectMapper();
+        String responseJson = mapper.writeValueAsString(matchResponse);
+
+        // then
+        Assert.assertNotNull(responseJson.contains("player1\":\"nadal\""));
     }
 }

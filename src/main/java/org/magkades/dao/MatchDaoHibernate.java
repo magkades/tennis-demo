@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Mysql implementation of MatchDAO.
  */
-public class MatchDaoMysql implements MatchDao {
+public class MatchDaoHibernate implements MatchDao {
 
     @Override
     public Long createMatch(String player1, String player2) {

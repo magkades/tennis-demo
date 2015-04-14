@@ -1,8 +1,14 @@
 package org.magkades.model;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Forms part of the response when match is read.
  */
+@XmlRootElement
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Score {
     private final int points;
     private final int games;

@@ -1,8 +1,11 @@
 package org.magkades.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Parameters to update match with new point.
  */
+@XmlRootElement
 public class NewPointParameters {
 
     private Long matchId;

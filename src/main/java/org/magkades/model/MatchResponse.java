@@ -1,10 +1,12 @@
 package org.magkades.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Map;
 
 /**
- * Response to be returned when match is read.
+ * Json response to be returned when match is read.
  */
+@XmlRootElement
 public class MatchResponse {
     private final String player1;
     private final String player2;

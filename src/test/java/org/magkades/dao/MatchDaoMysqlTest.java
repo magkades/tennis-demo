@@ -13,11 +13,11 @@ public class MatchDaoMysqlTest {
     private static final String PLAYER_1 = "nadal";
     private static final String PLAYER_2 = "federer";
 
-    MatchDaoMysql matchDao;
+    MatchDaoHibernate matchDao;
 
     @Before
     public void setUp() throws Exception {
-        matchDao = new MatchDaoMysql();
+        matchDao = new MatchDaoHibernate();
     }
 
     @Test
