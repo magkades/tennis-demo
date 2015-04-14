@@ -32,7 +32,7 @@ public class RuleSuite{
 
         @Override
         protected void after(){
-            Logger.getLogger("org.magkades.tests").log(Level.DEBUG, "Inside RuleSuite::ExternalResource::after.");
+            LoggerFactory.getLogger(RuleSuite.class).debug("Inside RuleSuite::ExternalResource::after.");
         }
     };
 }

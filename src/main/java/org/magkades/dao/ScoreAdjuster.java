@@ -85,7 +85,7 @@ public class ScoreAdjuster {
     }
 
     private boolean statusUpdateNeeded() {
-        return setsMap.get(scorer)==SETS_THRESHOLD;
+        return setsMap.get(scorer) == SETS_THRESHOLD;
     }
 
     private void updateCounts(MatchEntity match) {
