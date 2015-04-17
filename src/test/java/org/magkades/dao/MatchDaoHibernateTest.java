@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MatchDaoMysqlTest {
+public class MatchDaoHibernateTest {
     private static final String PLAYER_1 = "nadal";
     private static final String PLAYER_2 = "federer";
 
